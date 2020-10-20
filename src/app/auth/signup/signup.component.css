@@ -1,0 +1,14 @@
+.signup-form {
+  width: 400px;
+  height: 350px;
+  padding-top: 40px;
+  margin: 0 auto;
+}
+
+.signup-form .mat-form-field {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: 0 auto;
+}

@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <div>
+    <button mat-icon-button>
+      <mat-icon *ngIf="isSidebarOpen$ | async" (click)="onSidenavClose()">close</mat-icon>
+      <mat-icon *ngIf="!(isSidebarOpen$ | async)" (click)="onSidenavOpen()">menu</mat-icon>
+    </button>
+  </div>
+  <div class="nav-item"><a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a></div>
+  <div class="navbar">
+    <ul class="nav-links">
+      <li class="nav-item" *ngIf="!(isAuth$ | async)"><a [routerLink]="['/signup']" routerLinkActive="router-link-active">Signup</a></li>
+      <li class="nav-item" *ngIf="!(isAuth$ | async)"><a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></li>
+      <li class="nav-item" *ngIf="isAuth$ | async"><a [routerLink]="['/training']" routerLinkActive="router-link-active">Training</a></li>
+      <li class="nav-item" *ngIf="isAuth$ | async"><a (click)="onLogout()">Logout</a></li>
+    </ul>
+  </div>
+</mat-toolbar>

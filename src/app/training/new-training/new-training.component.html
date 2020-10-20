@@ -1,0 +1,22 @@
+<section class="new-training">
+  <form [formGroup]="newTrainingForm" (ngSubmit)="onStartTraining()">
+    <mat-card>
+      <mat-card-title>Time to start a workout!</mat-card-title>
+      <mat-card-content>
+        <mat-form-field *ngIf="!(isLoading$ | async) && (exercises$ | async)">
+          <mat-select placeholder="Select an exercise" formControlName="exercise">
+            <mat-option *ngFor="let exercise of exercises$ | async" [value]="exercise.id">
+              {{exercise.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </mat-card-content>
+      <mat-card-actions *ngIf="!(isLoading$ | async)">
+        <div align="end">
+          <button *ngIf="exercises$ | async" mat-raised-button color="primary" [disabled]="newTrainingForm.invalid">Start</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>

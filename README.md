@@ -1,14 +1,10 @@
-# NgTraining
+# ngrx-training-tracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+A training tracker app build with Angular, Angular Material, Angularfire (+ Firebase with Firestore) and NgRx based on udemy course https://www.udemy.com/course/angular-full-app-with-angular-material-angularfire-ngrx/
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
@@ -22,6 +18,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Live demo
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+https://ng-fitness-tracker-de0c9.web.app/

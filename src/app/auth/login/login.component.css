@@ -1,0 +1,14 @@
+.login-form {
+  width: 400px;
+  height: 300px;
+  padding-top: 40px;
+  margin: 0 auto;
+}
+
+.login-form .mat-form-field {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: 0 auto;
+}

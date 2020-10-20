@@ -1,0 +1,7 @@
+<section class="current-training">
+  <mat-spinner mode="determinate" [value]="progress"></mat-spinner>
+  <h1>{{progress}}%</h1>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="warn" (click)="onStop()">Stop</button>
+  </div>
+</section>
