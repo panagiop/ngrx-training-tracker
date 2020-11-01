@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concat, of } from 'rxjs';
-import { catchError, map, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as trainingActions from './training.actions';
 import * as uiActions from '../shared/ui.actions';
@@ -10,7 +10,6 @@ import * as fromTraining from './training.reducer';
 
 import TrainingService from './training.service';
 import UIService from '../shared/services/ui.service';
-import SubscriptionService from '../shared/services/subscription.service';
 
 @Injectable()
 export default class TrainingEffects {
@@ -18,7 +17,6 @@ export default class TrainingEffects {
     private actions: Actions,
     private trainingService: TrainingService,
     private uiService: UIService,
-    private subService: SubscriptionService,
     private store: Store<fromTraining.TrainingState>
   ) {}
 
@@ -29,7 +27,6 @@ export default class TrainingEffects {
       of(new uiActions.StartLoading()),
       this.trainingService.fetchAvailableExercises()
         .pipe(
-          takeUntil(this.subService.unsubscribe$),
           map((data) => new trainingActions.FetchAvailableTrainingsSuccess(data)),
           catchError(() => of(new trainingActions.FetchAvailableTrainingsError()))
         )
@@ -62,7 +59,6 @@ export default class TrainingEffects {
       of(new uiActions.StartLoading()),
       this.trainingService.fetchCompletedOrCancelledExercises()
         .pipe(
-          takeUntil(this.subService.unsubscribe$),
           map((data) => new trainingActions.FetchFinishedTrainingsSuccess(data)),
           catchError(() => of(new trainingActions.FetchFinishedTrainingsError()))
         )

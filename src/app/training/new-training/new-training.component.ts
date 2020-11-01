@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import SubscriptionService from 'src/app/shared/services/subscription.service';
 import { Exercise } from '../exercise.model';
-
 import * as fromRoot from '../../app.reducer';
 import * as fromTraining from '../training.reducer';
-
 import * as trainingActions from '../training.actions';
 
 @Component({
@@ -19,12 +16,12 @@ import * as trainingActions from '../training.actions';
 
 export default class NewTrainingComponent implements OnInit {
   newTrainingForm: FormGroup;
-  exercises$: Observable<Exercise[]>;
+  exercises$: Subscription;
+  exercises: Exercise[];
   isLoading$: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private subService: SubscriptionService,
     private store: Store<fromTraining.State>
   ) { }
 
@@ -32,7 +29,11 @@ export default class NewTrainingComponent implements OnInit {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.newTrainingForm = this.formBuilder.group({ exercise: ['', Validators.required] });
     this.store.dispatch(new trainingActions.FetchAvailableTrainings());
-    this.exercises$ = this.store.select(fromTraining.getAvailableExercices);
+    this.exercises$ = this.store
+      .select(fromTraining.getAvailableExercices)
+      .subscribe((exercises) => {
+        this.exercises = exercises;
+      });
   }
 
   onStartTraining(): void {
@@ -40,6 +41,6 @@ export default class NewTrainingComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subService.unsubscribeComponent$.next();
+    this.exercises$.unsubscribe();
   }
 }

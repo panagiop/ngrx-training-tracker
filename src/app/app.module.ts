@@ -18,7 +18,6 @@ import SidenavComponent from './navigation/sidenav/sidenav.component';
 import AuthService from './auth/auth.service';
 import TrainingService from './training/training.service';
 import UIService from './shared/services/ui.service';
-import SubscriptionService from './shared/services/subscription.service';
 
 import { environment } from '../environments/environment';
 import { reducers } from './app.reducer';
@@ -44,7 +43,7 @@ import { reducers } from './app.reducer';
     AppRoutingModule,
     AuthModule
   ],
-  providers: [AuthService, TrainingService, UIService, SubscriptionService],
+  providers: [AuthService, TrainingService, UIService],
   bootstrap: [AppComponent]
 })
 export default class AppModule { }
