@@ -2,6 +2,8 @@
 
 A training tracker app build with Angular, Angular Material, Angularfire (+ Firebase with Firestore) and NgRx based on udemy course https://www.udemy.com/course/angular-full-app-with-angular-material-angularfire-ngrx/
 
+**Note:** NgRx is an overkill for this app and it is used as a proof of concept.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
