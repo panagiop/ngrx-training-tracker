@@ -85,12 +85,12 @@ describe('TrainingEffects', () => {
     const fetchFinishedTrainingsErrorAction = new FetchFinishedTrainingsError();
     // create a ReplaySubject
     actions$ = new ReplaySubject(1);
-    // dispatch the FetchAvailableTrainings action
+    // dispatch the FetchFinishedTrainings action
     actions$.next(fetchFinishedTrainingsAction);
     it('should dispatch the success action when "fetching" the finished exercises', () => {
       // mock the TrainingService to prevent an HTTP request
       trainingService.fetchCompletedOrCancelledExercises.and.returnValue(of(finishedExercises));
-      effects.fetchAvailableTrainings$.pipe(take(1)).subscribe((result) => {
+      effects.fetchFinishedTrainings$.pipe(take(1)).subscribe((result) => {
         expect(result).toEqual(startLoadingAction);
       });
       effects.fetchFinishedTrainings$.pipe(skip(1)).subscribe((result) => {
@@ -100,7 +100,7 @@ describe('TrainingEffects', () => {
     it('should dispatch the error action when "fetching" the finished exercises', () => {
       // mock the TrainingService to prevent an HTTP request
       trainingService.fetchCompletedOrCancelledExercises.and.returnValue(throwError(of(finishedExercises)));
-      effects.fetchAvailableTrainings$.pipe(take(1)).subscribe((result) => {
+      effects.fetchFinishedTrainings$.pipe(take(1)).subscribe((result) => {
         expect(result).toEqual(startLoadingAction);
       });
       effects.fetchFinishedTrainings$.pipe(skip(1)).subscribe((result) => {
