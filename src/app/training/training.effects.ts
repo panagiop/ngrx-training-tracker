@@ -29,7 +29,7 @@ export default class TrainingEffects {
         .pipe(
           map((data) => new trainingActions.FetchAvailableTrainingsSuccess(data)),
           catchError(() => of(new trainingActions.FetchAvailableTrainingsError())),
-          take(20000) // NOTE: takeUntil(<unsubscribe_logic>) couldn't be easily tested
+          take(1) // NOTE: takeUntil(<unsubscribe_logic>) couldn't be easily tested
         )
     ))
   );
@@ -62,7 +62,7 @@ export default class TrainingEffects {
         .pipe(
           map((data) => new trainingActions.FetchFinishedTrainingsSuccess(data)),
           catchError(() => of(new trainingActions.FetchFinishedTrainingsError())),
-          take(20000)
+          take(1)
         )
     ))
   );
