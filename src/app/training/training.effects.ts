@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concat, of } from 'rxjs';
-import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as trainingActions from './training.actions';
 import * as uiActions from '../shared/ui.actions';
@@ -28,7 +28,8 @@ export default class TrainingEffects {
       this.trainingService.fetchAvailableExercises()
         .pipe(
           map((data) => new trainingActions.FetchAvailableTrainingsSuccess(data)),
-          catchError(() => of(new trainingActions.FetchAvailableTrainingsError()))
+          catchError(() => of(new trainingActions.FetchAvailableTrainingsError())),
+          take(20000) // NOTE: takeUntil(<unsubscribe_logic>) couldn't be easily tested
         )
     ))
   );
@@ -60,7 +61,8 @@ export default class TrainingEffects {
       this.trainingService.fetchCompletedOrCancelledExercises()
         .pipe(
           map((data) => new trainingActions.FetchFinishedTrainingsSuccess(data)),
-          catchError(() => of(new trainingActions.FetchFinishedTrainingsError()))
+          catchError(() => of(new trainingActions.FetchFinishedTrainingsError())),
+          take(20000)
         )
     ))
   );

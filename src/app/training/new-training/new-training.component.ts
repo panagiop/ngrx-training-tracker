@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Exercise } from '../exercise.model';
@@ -16,7 +16,7 @@ import * as trainingActions from '../training.actions';
 
 export default class NewTrainingComponent implements OnInit {
   newTrainingForm: FormGroup;
-  exercises$: Subscription;
+  exercises$: Observable<Exercise[]>;
   exercises: Exercise[];
   isLoading$: Observable<boolean>;
 
@@ -29,18 +29,10 @@ export default class NewTrainingComponent implements OnInit {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.newTrainingForm = this.formBuilder.group({ exercise: ['', Validators.required] });
     this.store.dispatch(new trainingActions.FetchAvailableTrainings());
-    this.exercises$ = this.store
-      .select(fromTraining.getAvailableExercices)
-      .subscribe((exercises) => {
-        this.exercises = exercises;
-      });
+    this.exercises$ = this.store.select(fromTraining.getAvailableExercices);
   }
 
   onStartTraining(): void {
     this.store.dispatch(new trainingActions.StartTraining(this.newTrainingForm.value.exercise));
-  }
-
-  ngOnDestroy(): void {
-    this.exercises$.unsubscribe();
   }
 }

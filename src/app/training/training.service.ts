@@ -28,6 +28,8 @@ export default class TrainingService {
   }
 
   addExercise(exercise: Exercise) {
-    return this.db.collection('finishedExercises').add(exercise);
+    return this.db
+      .collection('finishedExercises')
+      .add(exercise);
   }
 }

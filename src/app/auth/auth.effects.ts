@@ -39,7 +39,7 @@ export default class AuthEffects {
   @Effect({ dispatch: false })
   userLoggedOut$ = this.actions.pipe(
     ofType(authActions.SET_UNAUTHENTICATED),
-    tap(() => this.router.navigate(['/login']))
+    switchMap(() => this.authService.logout().then(() => this.router.navigate(['/login'])))
   );
 
   @Effect()
