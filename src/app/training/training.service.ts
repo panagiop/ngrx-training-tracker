@@ -7,7 +7,7 @@ import { Exercise } from './exercise.model';
 
 @Injectable()
 export default class TrainingService {
-  constructor(private db: AngularFirestore) {}
+  constructor(public db: AngularFirestore) {}
 
   fetchAvailableExercises() {
     return this.db

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 
-import TrainingComponent from './training.component';
+import TrainingComponent from '../../../app/training/training.component';
 
 describe('TrainingComponent', () => {
   let component: TrainingComponent;
